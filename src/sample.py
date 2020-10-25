@@ -1,6 +1,8 @@
 import tensorflow as tf
+import sys
+sys.path.insert(0, '/home/JackGrimm/mysite')
 
-from .src import model
+from . import model
 
 def penalize_used(logits, output, penalize=0.85):
 
