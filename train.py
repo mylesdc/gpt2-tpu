@@ -77,10 +77,10 @@ parser.add_argument('--float16', default=False, action='store_true', help='Use f
 parser.add_argument('--dtype', type=str, default='float32', help='dtype. <float32|float16|bfloat16>.')
 
 # 1.5B
-#parser.add_argument('--n_ctx', type=int, default=1024, help='For a fresh model, how large should n_ctx be?')
-#parser.add_argument('--n_embd', type=int, default=1600, help='For a fresh model, how large should n_embd be?')
-#parser.add_argument('--n_head', type=int, default=25, help='For a fresh model, how large should n_head be?')
-#parser.add_argument('--n_layer', type=int, default=48, help='For a fresh model, how large should n_layer be?')
+parser.add_argument('--n_ctx', type=int, default=1024, help='For a fresh model, how large should n_ctx be?')
+parser.add_argument('--n_embd', type=int, default=1600, help='For a fresh model, how large should n_embd be?')
+parser.add_argument('--n_head', type=int, default=25, help='For a fresh model, how large should n_head be?')
+parser.add_argument('--n_layer', type=int, default=48, help='For a fresh model, how large should n_layer be?')
 
 # 345M
 #parser.add_argument('--n_ctx', type=int, default=1024, help='For a fresh model, how large should n_ctx be?')
@@ -94,10 +94,10 @@ parser.add_argument('--dtype', type=str, default='float32', help='dtype. <float3
 #parser.add_argument('--n_head', type=int, default=12, help='For a fresh model, how large should n_head be?')
 #parser.add_argument('--n_layer', type=int, default=12, help='For a fresh model, how large should n_layer be?')
 
-parser.add_argument('--n_ctx', type=int, default=-1, help='For a fresh model, how large should n_ctx be?')
-parser.add_argument('--n_embd', type=int, default=-1, help='For a fresh model, how large should n_embd be?')
-parser.add_argument('--n_head', type=int, default=-1, help='For a fresh model, how large should n_head be?')
-parser.add_argument('--n_layer', type=int, default=-1, help='For a fresh model, how large should n_layer be?')
+#parser.add_argument('--n_ctx', type=int, default=-1, help='For a fresh model, how large should n_ctx be?')
+#parser.add_argument('--n_embd', type=int, default=-1, help='For a fresh model, how large should n_embd be?')
+#parser.add_argument('--n_head', type=int, default=-1, help='For a fresh model, how large should n_head be?')
+#parser.add_argument('--n_layer', type=int, default=-1, help='For a fresh model, how large should n_layer be?')
 
 parser.add_argument('--sample_ctx', type=int, default=-1, help='Compute loss over N samples. Equal to n_ctx if set < 0.')
 
@@ -277,7 +277,7 @@ def main():
             opt = tensor2tensor.utils.optimize.adafactor(learning_rate=lr, hparams=ada_hparams)
         else:
             exit('Bad optimizer:', args.optimizer)
-        
+
         #if tpu_addr:
         #    # https://pulsejet.github.io/blog/posts/tpu-without-estimator/
         #    from tensorflow.contrib.tpu.python.tpu import tpu_function
@@ -428,7 +428,7 @@ def main():
                     loss=v_val_loss))
 
         start_time = time.time()
-        
+
         def elapsed():
             return time.time() - start_time
 

@@ -164,8 +164,8 @@ class HighSpeedTokenizer(object):
     return text
 
 def get_encoder(checkpoint_path):
-    vocab_path = os.path.join(checkpoint_path, 'encoder.json')
-    bpe_merges_path = os.path.join(checkpoint_path, 'vocab.bpe')
+    vocab_path = os.path.join("models/"+ checkpoint_path, 'encoder.json')
+    bpe_merges_path = os.path.join("models/"+ checkpoint_path, 'vocab.bpe')
     if use_high_speed_tokenizer:
       return HighSpeedTokenizer(vocab_path=vocab_path, bpe_merges_path=bpe_merges_path)
     with open(vocab_path, 'r') as f:
