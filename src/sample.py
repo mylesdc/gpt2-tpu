@@ -1,8 +1,7 @@
 import tensorflow as tf
 import sys
-sys.path.insert(0, '/content/gpt-2')
 
-from . import model
+import model
 
 def penalize_used(logits, output, penalize=0.85):
 
