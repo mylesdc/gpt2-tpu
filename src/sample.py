@@ -1,6 +1,6 @@
 import tensorflow as tf
 
-from . import model
+from .model import model
 
 def penalize_used(logits, output, penalize=0.85):
 
