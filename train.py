@@ -368,6 +368,31 @@ def main():
                 counter = int(fp.read()) + 1
 
         @tflex.register_command
+        def get_tarfile_name(checkpoint_folder):
+            """Converts a folder path into a filename for a .tar archive"""
+            tarfile_name = checkpoint_folder.replace(os.path.sep, '_') + '.tar'
+
+            return tarfile_name
+
+
+        def copy_checkpoint_to_gdrive(run_name='run1', copy_folder=False):
+            """Copies the checkpoint folder to a mounted Google Drive."""
+            is_mounted()
+
+            checkpoint_folder = os.path.join('checkpoint', run_name)
+
+            if copy_folder:
+                shutil.copytree(checkpoint_folder, "/content/drive/My Drive/" + checkpoint_folder)
+            else:
+                file_path = get_tarfile_name(checkpoint_folder)
+
+                # Reference: https://stackoverflow.com/a/17081026
+                with tarfile.open(file_path, 'w') as tar:
+                    tar.add(checkpoint_folder)
+
+                shutil.copyfile(file_path, "/content/drive/My Drive/" + file_path)
+
+        @tflex.register_command        
         def save():
             maketree(os.path.join(CHECKPOINT_DIR, args.run_name))
             print(
@@ -383,6 +408,7 @@ def main():
             print('Saved in %f seconds' % (t1 - t0))
             with open(counter_path, 'w') as fp:
                 fp.write(str(counter) + '\n')
+            copy_checkpoint_to_gdrive()
 
         @tflex.register_command
         def generate_samples():
