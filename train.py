@@ -377,7 +377,7 @@ def main():
 
         def copy_checkpoint_to_gdrive(run_name='run1', copy_folder=False):
             """Copies the checkpoint folder to a mounted Google Drive."""
-            is_mounted()
+            #is_mounted()
 
             checkpoint_folder = os.path.join('checkpoint', run_name)
 
@@ -392,7 +392,7 @@ def main():
 
                 shutil.copyfile(file_path, "/content/drive/My Drive/" + file_path)
 
-        @tflex.register_command        
+        @tflex.register_command
         def save():
             maketree(os.path.join(CHECKPOINT_DIR, args.run_name))
             print(
