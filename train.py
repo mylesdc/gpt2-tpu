@@ -411,7 +411,7 @@ def main():
             print('Saved in %f seconds' % (t1 - t0))
             with open(counter_path, 'w') as fp:
                 fp.write(str(counter) + '\n')
-            copy_checkpoint_to_gdrive()
+            #copy_checkpoint_to_gdrive()
 
         @tflex.register_command
         def generate_samples():
